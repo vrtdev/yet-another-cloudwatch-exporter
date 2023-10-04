@@ -1,0 +1,488 @@
+---
+apiVersion: v1alpha1
+discovery:
+  jobs:
+  - addCloudwatchTimestamp: true
+
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/Lambda
+    metrics:
+    - name: Invocations
+      statistics:
+      - Average
+      - Maximum
+      - Minimum
+      - SampleCount
+      - Sum
+    - name: Errors
+      statistics:
+      - Average
+      - Maximum
+      - Minimum
+      - SampleCount
+      - Sum
+    - name: Throttles
+      statistics:
+      - Average
+      - Maximum
+      - Minimum
+      - SampleCount
+      - Sum
+    - name: Duration
+      statistics:
+      - Average
+      - Maximum
+      - Minimum
+      - SampleCount
+      - Sum
+    - name: ConcurrentExecutions
+      statistics:
+      - Average
+      - Maximum
+      - Minimum
+      - SampleCount
+      - Sum
+    - name: IteratorAge
+      statistics:
+      - Average
+      - Maximum
+      - Minimum
+      - SampleCount
+    - name: RecursiveInvocationsDropped
+      statistics:
+      - Average
+      - Maximum
+      - Minimum
+      - SampleCount
+  - addCloudwatchTimestamp: true
+
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/ApplicationELB
+    metrics:
+    - name: RequestCount
+      statistics:
+      - Sum
+    - name: TargetResponseTime
+      statistics:
+      - Average
+      - p50
+      - p90
+      - p95
+      - p99
+    - name: HTTPCode_Target_2XX_Count
+      statistics:
+      - Sum
+    - name: HTTPCode_Target_3XX_Count
+      statistics:
+      - Sum
+    - name: HTTPCode_Target_4XX_Count
+      statistics:
+      - Sum
+    - name: HTTPCode_Target_5XX_Count
+      statistics:
+      - Sum
+  - addCloudwatchTimestamp: true
+
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/ElasticBeanstalk
+    metrics:
+    - name: EnvironmentHealth
+      statistics:
+      - Maximum
+  - addCloudwatchTimestamp: true
+
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/ElastiCache
+    metrics:
+    - name: CPUUtilization
+      statistics:
+      - Average
+    - name: CurrConnections
+      statistics:
+      - Average
+    - name: ReplicationLag
+      statistics:
+      - Average
+    - name: CacheHits
+      statistics:
+      - Average
+    - name: CacheMisses
+      statistics:
+      - Average
+    - name: FreeableMemory
+      statistics:
+      - Average
+    - name: DatabaseMemoryUsagePercentage
+      statistics:
+      - Average
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/ES
+    metrics:
+    - name: ClusterStatus.yellow
+      statistics:
+      - Sum
+    - name: ClusterStatus.red
+      statistics:
+      - Sum
+    - name: FreeStorageSpace
+      statistics:
+      - Sum
+      - Minimum
+    - name: ElasticsearchRequests
+      statistics:
+      - Sum
+    - name: CPUUtilization
+      statistics:
+      - Average
+      - Maximum
+    - name: 4xx
+      statistics:
+      - Sum
+    - name: AutomatedSnapshotFailure
+      statistics:
+      - Maximum
+    - name: ClusterIndexWritesBlocked
+      statistics:
+      - Maximum
+    - name: CPUCreditBalance
+      statistics:
+      - Average
+    - name: IndexingRate
+      statistics:
+      - Average
+      - Maximum
+    - name: JVMMemoryPressure
+      statistics:
+      - Maximum
+    - name: Nodes
+      statistics:
+      - Minimum
+      - Maximum
+    - name: SearchLatency
+      statistics:
+      - Average
+      - Maximum
+    - name: ThreadpoolSearchQueue
+      statistics:
+      - Maximum
+    - name: ThreadpoolSearchRejected
+      statistics:
+      - Sum
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/States
+    metrics:
+    - name: ExecutionsStarted
+      statistics:
+      - Sum
+    - name: ExecutionsSucceeded
+      statistics:
+      - Sum
+    - name: ExecutionsFailed
+      statistics:
+      - Sum
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/SNS
+    metrics:
+    - name: NumberOfMessagesPublished
+      statistics:
+      - Sum
+    - name: NumberOfNotificationsDelivered
+      statistics:
+      - Sum
+    - name: NumberOfNotificationsFailed
+      statistics:
+      - Sum
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/SQS
+    metrics:
+    - name: ApproximateAgeOfOldestMessage
+      statistics:
+      - Maximum
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/RDS
+    metrics:
+    - name: CPUUtilization
+      statistics:
+      - Average
+    - name: FreeableMemory
+      statistics:
+      - Average
+    - name: DatabaseConnections
+      statistics:
+      - Average
+    - name: BurstBalance
+      statistics:
+      - Average
+    - name: CPUCreditBalance
+      statistics:
+      - Average
+    - name: FreeStorageSpace
+      statistics:
+      - Average
+    - name: ReadIOPS
+      statistics:
+      - Average
+    - name: WriteIOPS
+      statistics:
+      - Average
+    - name: SwapUsage
+      statistics:
+      - Average
+  - addCloudwatchTimestamp: true
+    regions:
+    - us-east-1
+    period: 300
+    length: 300
+    type: AWS/CloudFront
+    metrics:
+    - name: Requests
+      statistics:
+      - Sum
+    - name: 4xxErrorRate
+      statistics:
+      - Average
+    - name: 5xxErrorRate
+      statistics:
+      - Average
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/EFS
+    metrics:
+    - name: BurstCreditBalance
+      statistics:
+      - Average
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/EC2
+    metrics:
+    - name: NetworkOut
+      statistics:
+      - Average
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/S3
+    metrics:
+    - name: BucketSizeBytes
+      statistics:
+      - Sum
+    - name: NumberOfObjects
+      statistics:
+      - Sum
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/Backup
+    metrics:
+    - name: NumberOfBackupJobsFailed
+      statistics:
+      - Sum
+    - name: NumberOfBackupJobsAborted
+      statistics:
+      - Sum
+    - name: NumberOfBackupJobsCompleted
+      statistics:
+      - Sum
+    - name: NumberOfBackupJobsExpired
+      statistics:
+      - Sum
+    - name: NumberOfRecoveryPointsExpired
+      statistics:
+      - Sum
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/AmazonMQ
+    metrics:
+    - name: MessageCount
+      statistics:
+      - Sum
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/ECS
+    metrics:
+    - name: CPUUtilization
+      statistics:
+      - Average
+      - Minimum
+      - Maximum
+    - name: MemoryUtilization
+      statistics:
+      - Average
+      - Minimum
+      - Maximum
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: ECS/ContainerInsights
+    metrics:
+    - name: ContainerInstanceCount
+      statistics:
+      - Average
+    - name: ServiceCount
+      statistics:
+      - Average
+    - name: DesiredTaskCount
+      statistics:
+      - Average
+    - name: TaskCount
+      statistics:
+      - Average
+    - name: PendingTaskCount
+      statistics:
+      - Average
+    - name: RunningTaskCount
+      statistics:
+      - Average
+    - name: CpuReserved
+      statistics:
+      - Average
+    - name: CpuUtilized
+      statistics:
+      - Average
+    - name: MemoryReserved
+      statistics:
+      - Average
+    - name: MemoryUtilized
+      statistics:
+      - Average
+    - name: StorageReadBytes
+      statistics:
+      - Average
+    - name: StorageWriteBytes
+      statistics:
+      - Average
+    - name: NetworkRxBytes
+      statistics:
+      - Average
+    - name: NetworkTxBytes
+      statistics:
+      - Average
+    - name: DeploymentCount
+      statistics:
+      - Average
+    - name: TaskSetCount
+      statistics:
+      - Average
+customNamespace:
+- addCloudwatchTimestamp: true
+  regions:
+  - eu-west-1
+  period: 300
+  length: 300
+  name: VRTNu-api-GraphQL
+  namespace: VRTNu-api-GraphQL
+  metrics:
+  - name: AemGracefulTimeout-dev
+    statistics:
+    - Sum
+  - name: AemGracefulTimeout-stag
+    statistics:
+    - Sum
+  - name: AemGracefulTimeout-prod
+    statistics:
+    - Sum
+  - name: CircuitBreaker
+    statistics:
+    - Sum
+- addCloudwatchTimestamp: true
+  regions:
+  - eu-west-1
+  period: 300
+  length: 300
+  name: temporary-apigateway
+  namespace: AWS/ApiGateway
+  metrics:
+  - name: Latency
+    statistics:
+    - Average
+    - Maximum
+    - p95
+    - p99
+  - name: Count
+    statistics:
+    - SampleCount
+    - Sum
+  - name: 4xx
+    statistics:
+    - Sum
+  - name: 4XXError
+    statistics:
+    - Sum
+    - Average
+  - name: 5xx
+    statistics:
+    - Sum
+  - name: 5XXError
+    statistics:
+    - Sum
+    - Average
+- addCloudwatchTimestamp: true
+  regions:
+  - eu-west-1
+  period: 300
+  length: 300
+  name: CustomLambdaMetrics
+  namespace: CustomLambdaMetrics
+  metrics:
+  - name: AllowedConcurrency
+    statistics:
+    - Minimum
+    - Maximum
+    - Sum
+    - SampleCount
+  - name: HasReservedConcurrency
+    statistics:
+    - Minimum
+    - Maximum
+    - Sum
+    - SampleCount
