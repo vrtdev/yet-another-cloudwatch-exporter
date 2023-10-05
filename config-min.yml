@@ -1,0 +1,17 @@
+---
+apiVersion: v1alpha1
+discovery:
+  jobs:
+  - addCloudwatchTimestamp: true
+    regions:
+    - eu-west-1
+    period: 300
+    length: 300
+    type: AWS/ApiGateway
+    metrics:
+    - name: Count
+      statistics:
+      - SampleCount
+    searchTags:
+      - key: project
+        value: vrtnu-api
