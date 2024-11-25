@@ -1016,4 +1016,14 @@ var SupportedServices = serviceConfigs{
 			regexp.MustCompile(":service/(?P<Service>[^/]+)$"),
 		},
 	},
+	{
+		Namespace: "AWS/Network Manager",
+		Alias:     "networkmanager",
+		ResourceFilters: []*string{
+			aws.String("networkmanager:core-network"),
+		},
+		DimensionRegexps: []*regexp.Regexp{
+			regexp.MustCompile(":core-network/(?P<CoreNetwork>[^/]+)$"),
+		},
+	},
 }
