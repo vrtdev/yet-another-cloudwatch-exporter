@@ -355,7 +355,7 @@ func newLogger(format, level string) *slog.Logger {
 	_ = fmt.Set(format)
 
 	lvl := &promslog.AllowedLevel{}
-	_ = fmt.Set(level)
+	_ = lvl.Set(level)
 
 	return promslog.New(&promslog.Config{Format: fmt, Level: lvl})
 }
