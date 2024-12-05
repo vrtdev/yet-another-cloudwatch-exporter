@@ -351,11 +351,11 @@ func newLogger(format, level string) *slog.Logger {
 	// If flag parsing was successful, then we know that format and level
 	// are both valid options; no need to error check their returns, just
 	// set their values.
-	fmt := &promslog.AllowedFormat{}
-	_ = fmt.Set(format)
+	f := &promslog.AllowedFormat{}
+	_ = f.Set(format)
 
 	lvl := &promslog.AllowedLevel{}
 	_ = lvl.Set(level)
 
-	return promslog.New(&promslog.Config{Format: fmt, Level: lvl})
+	return promslog.New(&promslog.Config{Format: f, Level: lvl})
 }
