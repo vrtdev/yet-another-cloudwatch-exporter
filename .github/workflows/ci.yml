@@ -85,7 +85,7 @@ jobs:
     if: |
       (github.repository == 'prometheus-community/yet-another-cloudwatch-exporter')
       &&
-      (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v.'))
+      (github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v0.'))
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: prometheus/promci@52c7012f5f0070d7281b8db4a119e21341d43c91 # v0.4.5
