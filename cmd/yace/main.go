@@ -24,6 +24,7 @@ import (
 
 	"github.com/prometheus/common/promslog"
 	promslogflag "github.com/prometheus/common/promslog/flag"
+	"github.com/prometheus/common/version"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/sync/semaphore"
 
@@ -47,8 +48,6 @@ Version: %s
 </html>`
 	htmlPprof = `<p><a href="/debug/pprof">Pprof</a><p>`
 )
-
-var version = "custom-build"
 
 var sem = semaphore.NewWeighted(1)
 
@@ -90,7 +89,7 @@ func main() {
 func NewYACEApp() *cli.App {
 	yace := cli.NewApp()
 	yace.Name = "Yet Another CloudWatch Exporter"
-	yace.Version = version
+	yace.Version = version.Version
 	yace.Usage = "YACE configured to retrieve CloudWatch metrics through the AWS API"
 	yace.Description = ""
 	yace.Authors = []*cli.Author{
@@ -219,7 +218,7 @@ func NewYACEApp() *cli.App {
 				&cli.StringFlag{Name: "config.file", Value: "config.yml", Usage: "Path to configuration file.", Destination: &configFile},
 			},
 			Action: func(_ *cli.Context) error {
-				logger = newLogger(logFormat, logLevel).With("version", version)
+				logger = newLogger(logFormat, logLevel).With("version", version.Version)
 				logger.Info("Parsing config")
 				cfg := config.ScrapeConf{}
 				if _, err := cfg.Load(configFile, logger); err != nil {
@@ -236,7 +235,7 @@ func NewYACEApp() *cli.App {
 			Aliases: []string{"v"},
 			Usage:   "prints current yace version.",
 			Action: func(_ *cli.Context) error {
-				fmt.Println(version)
+				fmt.Println(version.Version)
 				os.Exit(0)
 				return nil
 			},
@@ -249,7 +248,7 @@ func NewYACEApp() *cli.App {
 }
 
 func startScraper(c *cli.Context) error {
-	logger = newLogger(logFormat, logLevel).With("version", version)
+	logger = newLogger(logFormat, logLevel).With("version", version.Version)
 
 	// log warning if the two concurrency limiting methods are configured via CLI
 	if c.IsSet("cloudwatch-concurrency") && c.IsSet("cloudwatch-concurrency.per-api-limit-enabled") {
@@ -299,7 +298,7 @@ func startScraper(c *cli.Context) error {
 			pprofLink = htmlPprof
 		}
 
-		_, _ = w.Write([]byte(fmt.Sprintf(htmlVersion, version, pprofLink)))
+		_, _ = w.Write([]byte(fmt.Sprintf(htmlVersion, version.Version, pprofLink)))
 	})
 
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, _ *http.Request) {
@@ -341,7 +340,7 @@ func startScraper(c *cli.Context) error {
 		go s.decoupled(ctx, logger, newJobsCfg, cache)
 	})
 
-	logger.Info("Yace startup completed", "version", version, "feature_flags", strings.Join(featureFlags, ","))
+	logger.Info("Yace startup completed", "build_info", version.Info(), "build_context", version.BuildContext(), "feature_flags", strings.Join(featureFlags, ","))
 
 	srv := &http.Server{Addr: addr, Handler: mux}
 	return srv.ListenAndServe()
