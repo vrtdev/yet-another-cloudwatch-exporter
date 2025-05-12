@@ -18,7 +18,7 @@ All flags may be prefixed with either one hypen or two (i.e., both `-config.file
 | `-listen-address` | Network address to listen to | `127.0.0.1:5000` |
 | `-config.file` | Path to the configuration file | `config.yml` |
 | `-log.format` | Output format of log messages. One of: [logfmt, json] | `json` |
-| `-debug` | Log at debug level | `false` |
+| `-log.level` | Log at selected level. One of: [debug, info, warn, error] | `info` |
 | `-fips` | Use FIPS compliant AWS API | `false` |
 | `-cloudwatch-concurrency` | Maximum number of concurrent requests to CloudWatch API | `5` |
 | `-cloudwatch-concurrency.per-api-limit-enabled` | Enables a concurrency limiter, that has a specific limit per CloudWatch API call. | `false` |
