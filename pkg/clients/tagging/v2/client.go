@@ -131,32 +131,34 @@ func (c client) GetResources(ctx context.Context, job model.DiscoveryJob, region
 				if resource.FilterThroughTags(job.SearchTags) {
 					resources = append(resources, &resource)
 				} else {
-					c.logger.Debug("Skipping resource because search tags do not match", "arn", resource.ARN)
+					c.logger.Info("Skipping resource because search tags do not match", "arn", resource.ARN)
 				}
 			}
 		}
 
-		c.logger.Debug("GetResourcesPages finished", "total", len(resources))
+		c.logger.Info("GetResourcesPages finished", "total", len(resources), "namespace", job.Namespace, "region", region)
 	}
 
 	if ext, ok := ServiceFilters[svc.Namespace]; ok {
 		if ext.ResourceFunc != nil {
+			lenR := len(resources)
 			shouldHaveDiscoveredResources = true
 			newResources, err := ext.ResourceFunc(ctx, c, job, region)
 			if err != nil {
 				return nil, fmt.Errorf("failed to apply ResourceFunc for %s, %w", svc.Namespace, err)
 			}
 			resources = append(resources, newResources...)
-			c.logger.Debug("ResourceFunc finished", "total", len(resources))
+			c.logger.Info("ResourceFunc finished", "was", lenR, "total", len(resources), "namespace", job.Namespace, "region", region)
 		}
 
 		if ext.FilterFunc != nil {
+			lenR := len(resources)
 			filteredResources, err := ext.FilterFunc(ctx, c, resources)
 			if err != nil {
 				return nil, fmt.Errorf("failed to apply FilterFunc for %s, %w", svc.Namespace, err)
 			}
 			resources = filteredResources
-			c.logger.Debug("FilterFunc finished", "total", len(resources))
+			c.logger.Info("FilterFunc finished", "was", lenR, "total", len(resources), "namespace", job.Namespace, "region", region)
 		}
 	}
 
